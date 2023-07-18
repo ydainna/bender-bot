@@ -6,7 +6,7 @@
     "start": "ts-node src/Bot.ts"
   },
   "devDependencies": {
-    "@tsconfig/node16": "^1.0.4",
+    "@tsconfig/node16": "^16.1.0",
     "@types/node": "^18.16.6",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
