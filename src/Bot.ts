@@ -22,7 +22,6 @@ import moment from "moment";
       GatewayIntentBits.GuildIntegrations,
       GatewayIntentBits.GuildWebhooks,
       GatewayIntentBits.GuildInvites,
-      GatewayIntentBits.GuildBans,
     ],
   });
 
