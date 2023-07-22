@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, Interaction, ChannelType } from "discord.js";
+import { CommandInteraction, Client, Interaction } from "discord.js";
 import { Commands } from "../Commands";
 import { getLogger } from "../utils/getLogger";
 

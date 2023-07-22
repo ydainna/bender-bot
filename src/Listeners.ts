@@ -8,6 +8,7 @@ import { guildMemberRemoveListener } from "./listeners/guildMemberRemoveListener
 //Message
 import { messageDeleteListener } from "./listeners/messageDeleteListener";
 import { messageUpdateListener } from "./listeners/messageUpdateListener";
+import { messageCreate } from "./listeners/messageCreate";
 
 export const Listeners = [
   readyListener,
@@ -16,4 +17,5 @@ export const Listeners = [
   guildMemberRemoveListener,
   messageDeleteListener,
   messageUpdateListener,
+  messageCreate,
 ];
