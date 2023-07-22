@@ -28,7 +28,7 @@ export const TtsVoiceCommand: Command = {
     }
 
     const audioUrl = getAudioUrl(tts as string, {
-      lang: "fr",
+      lang: "fr-FR",
       slow: false,
       host: "https://translate.google.com",
     });
