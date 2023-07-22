@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { Client, GatewayIntentBits } from "discord.js";
+import { Client, GatewayIntentBits, Partials } from "discord.js";
 import { Listeners } from "./Listeners";
 import { getLogger } from "./utils/getLogger";
 import moment from "moment";
@@ -22,7 +22,11 @@ import moment from "moment";
       GatewayIntentBits.GuildIntegrations,
       GatewayIntentBits.GuildWebhooks,
       GatewayIntentBits.GuildInvites,
+      GatewayIntentBits.DirectMessages,
+      GatewayIntentBits.DirectMessageReactions,
+      GatewayIntentBits.DirectMessageTyping,
     ],
+    partials: [Partials.Channel],
   });
 
   for await (const listener of Listeners) {

@@ -21,6 +21,7 @@ export const TtsVoiceCommand: Command = {
   run: async (client: Client, interaction: CommandInteraction) => {
     const tts = interaction.options.get("tts")?.value;
     const channel = interaction.member instanceof GuildMember ? interaction.member.voice.channel : null;
+
     if (!channel) {
       setError("You must be in a voice channel to use this command.", interaction);
       return;
@@ -40,6 +41,6 @@ export const TtsVoiceCommand: Command = {
     voiceConnection.subscribe(player);
     player.play(ressource);
 
-    await interaction.followUp("Vous avez envoyé le message suivant :\n " + tts + "\n dans le channel :\n" + channel.name);
+    await interaction.followUp("Vous avez envoyé le message suivant :\n " + tts + "\n\n dans le channel :\n" + channel.name);
   },
 };
