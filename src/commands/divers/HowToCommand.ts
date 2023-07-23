@@ -27,9 +27,9 @@ export const HowToCommand: Command = {
   ephemeral: false,
 
   run: async (client: Client, interaction: CommandInteraction) => {
-    const randomValue = getRandomInt(0, 100);
-    const value = interaction.options.get("how")?.value;
-    const embedJewish = new EmbedBuilder()
+    const randomValue: number = getRandomInt(0, 100);
+    const value: string | number | boolean | undefined = interaction.options.get("how")?.value;
+    const embedJewish: EmbedBuilder = new EmbedBuilder()
       .setColor("#0026FF")
       .addFields({ name: "How to jewish ?", value: "Vous êtes à " + randomValue + "% juif" })
       .setTitle("Jewish machine")
@@ -40,7 +40,7 @@ export const HowToCommand: Command = {
         iconURL: interaction.user.displayAvatarURL(),
       });
 
-    const embedGay = new EmbedBuilder()
+    const embedGay: EmbedBuilder = new EmbedBuilder()
       .setColor("#B200FF")
       .addFields({ name: "How to gay ?", value: "Vous êtes à " + randomValue + "% gay" })
       .setTitle("Gay machine")

@@ -1,6 +1,6 @@
-import { CommandInteraction, Client, ApplicationCommandType, GuildMember, ApplicationCommandOptionType } from "discord.js";
+import { CommandInteraction, Client, ApplicationCommandType, GuildMember, ApplicationCommandOptionType, VoiceBasedChannel } from "discord.js";
 import { Command } from "../../Command";
-import { createAudioResource, joinVoiceChannel, createAudioPlayer } from "@discordjs/voice";
+import { createAudioResource, joinVoiceChannel, createAudioPlayer, VoiceConnection, AudioResource, AudioPlayer } from "@discordjs/voice";
 import { getAudioUrl } from "google-tts-api";
 import { setError } from "../../utils/setError";
 
@@ -19,24 +19,28 @@ export const TtsVoiceCommand: Command = {
   ephemeral: true,
 
   run: async (client: Client, interaction: CommandInteraction) => {
-    const tts = interaction.options.get("tts")?.value;
-    const channel = interaction.member instanceof GuildMember ? interaction.member.voice.channel : null;
+    const tts: string | number | boolean | undefined = interaction.options.get("tts")?.value;
+    const channel: VoiceBasedChannel | null = interaction.member instanceof GuildMember ? interaction.member.voice.channel : null;
 
     if (!channel) {
       setError("You must be in a voice channel to use this command.", interaction);
       return;
     }
 
-    const audioUrl = getAudioUrl(tts as string, {
+    const audioUrl: string = getAudioUrl(tts as string, {
       lang: "fr-FR",
       slow: false,
       host: "https://translate.google.com",
     });
 
-    let voiceConnection = joinVoiceChannel({ channelId: channel.id, guildId: channel.guild.id, adapterCreator: channel.guild.voiceAdapterCreator });
+    let voiceConnection: VoiceConnection = joinVoiceChannel({
+      channelId: channel.id,
+      guildId: channel.guild.id,
+      adapterCreator: channel.guild.voiceAdapterCreator,
+    });
 
-    const ressource = createAudioResource(audioUrl);
-    const player = createAudioPlayer();
+    const ressource: AudioResource<null> = createAudioResource(audioUrl);
+    const player: AudioPlayer = createAudioPlayer();
 
     voiceConnection.subscribe(player);
     player.play(ressource);

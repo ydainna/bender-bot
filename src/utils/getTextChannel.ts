@@ -1,8 +1,8 @@
-import { CommandInteraction, Client, TextChannel } from "discord.js";
+import { CommandInteraction, Client, TextChannel, Channel } from "discord.js";
 import { setError } from "./setError";
 
 export async function getTextChannelForInteraction(client: Client, interaction: CommandInteraction): Promise<TextChannel | null> {
-  const channel = await client.channels.fetch(interaction.channelId);
+  const channel: Channel | null = await client.channels.fetch(interaction.channelId);
   if (channel === null) {
     setError("La channel n'a pas été trouver ou n'existe pas", interaction);
     return null;

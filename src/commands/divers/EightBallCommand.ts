@@ -41,9 +41,9 @@ export const EightBallCommand: Command = {
   ephemeral: false,
 
   run: async (client: Client, interaction: CommandInteraction) => {
-    const randomResponse = responses[getRandomInt(0, responses.length - 1)];
-    const ask = interaction.options.get("ask")?.value;
-    const embed = new EmbedBuilder()
+    const randomResponse: string = responses[getRandomInt(0, responses.length - 1)];
+    const ask: string | number | boolean | undefined = interaction.options.get("ask")?.value;
+    const embed: EmbedBuilder = new EmbedBuilder()
       .setColor("#000000")
       .addFields({ name: ask as string, value: randomResponse })
       .setTitle("Magic 8-Ball")

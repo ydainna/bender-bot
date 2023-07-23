@@ -3,14 +3,15 @@ import { Client, GatewayIntentBits, Partials } from "discord.js";
 import { Listeners } from "./Listeners";
 import { getLogger } from "./utils/getLogger";
 import moment from "moment";
+import { Logger } from "tslog";
 
 (async () => {
   const token = process.env.BOT_TOKEN as string;
 
-  const log = getLogger("Bot");
+  const log: Logger<unknown> = getLogger("Bot");
   log.info("Bot is starting...");
 
-  const client = new Client({
+  const client: Client<boolean> = new Client({
     intents: [
       GatewayIntentBits.Guilds,
       GatewayIntentBits.GuildMessages,
@@ -30,7 +31,7 @@ import moment from "moment";
   });
 
   for await (const listener of Listeners) {
-    const log = getLogger("Listener");
+    const log: Logger<unknown> = getLogger("Listener");
     log.info(`Registering listener ${listener.name}`);
     // @ts-expect-error
     client.on(listener.name, (...args) => listener.execute(client, ...args));

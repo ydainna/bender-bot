@@ -9,8 +9,8 @@ export const DiceCommand: Command = {
   ephemeral: false,
 
   run: async (client: Client, interaction: CommandInteraction) => {
-    const randomNumber = getRandomInt(1, 100);
-    const embed = new EmbedBuilder()
+    const randomNumber: number = getRandomInt(1, 100);
+    const embed: EmbedBuilder = new EmbedBuilder()
       .setColor("#FFFFFF")
       .setTitle("Dice")
       .setDescription(`${interaction.user.username} a eu **${randomNumber}** au lancé de dé`)

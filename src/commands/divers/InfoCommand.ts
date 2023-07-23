@@ -9,7 +9,7 @@ export const InfoCommand: Command = {
   ephemeral: false,
 
   run: async (client: Client, interaction: CommandInteraction) => {
-    const embed = new EmbedBuilder()
+    const embed: EmbedBuilder = new EmbedBuilder()
       .setColor("#FFFFFF")
       .setTitle("Information(s)")
       .setDescription(`Le bot est en ligne depuis **${prettyMilliseconds(client.uptime as number)}**`)

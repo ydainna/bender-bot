@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType, ApplicationCommandType, CommandInteraction, Client, EmbedBuilder } from "discord.js";
+import { ApplicationCommandOptionType, ApplicationCommandType, CommandInteraction, Client, EmbedBuilder, User, GuildMember } from "discord.js";
 import moment from "moment";
 import { Command } from "../../Command";
 
@@ -16,10 +16,10 @@ export const UserInformationCommand: Command = {
     },
   ],
   run: async (client: Client, interaction: CommandInteraction) => {
-    const userId = interaction.options.get("mention")?.value;
-    const user = await client.users.fetch(userId as string);
-    const memberGuild = interaction.guild?.members.cache.get(userId as string);
-    const embed = new EmbedBuilder()
+    const userId: string | number | boolean | undefined = interaction.options.get("mention")?.value;
+    const user: User = await client.users.fetch(userId as string);
+    const memberGuild: GuildMember | undefined = interaction.guild?.members.cache.get(userId as string);
+    const embed: EmbedBuilder = new EmbedBuilder()
       .setTitle(`${user.username}'s Information`)
       .setThumbnail(user.displayAvatarURL({ forceStatic: false }))
       .addFields(
