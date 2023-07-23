@@ -6,7 +6,7 @@ import moment from "moment";
 import { Logger } from "tslog";
 
 (async () => {
-  const token = process.env.BOT_TOKEN as string;
+  const token: string = process.env.BOT_TOKEN as string;
 
   const log: Logger<unknown> = getLogger("Bot");
   log.info("Bot is starting...");
