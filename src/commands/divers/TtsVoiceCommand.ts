@@ -15,11 +15,25 @@ export const TtsVoiceCommand: Command = {
       name: "tts",
       description: "Add your text for tts",
     },
+    {
+      type: ApplicationCommandOptionType.String,
+      required: false,
+      name: "lang",
+      description: "Language for tts (accents)",
+    },
+    {
+      type: ApplicationCommandOptionType.Boolean,
+      required: false,
+      name: "slow",
+      description: "Slow mode for tts",
+    },
   ],
   ephemeral: true,
 
   run: async (client: Client, interaction: CommandInteraction) => {
     const tts: string | number | boolean | undefined = interaction.options.get("tts")?.value;
+    const lang: string | number | boolean | undefined = interaction.options.get("lang")?.value;
+    const slow: string | number | boolean | undefined = interaction.options.get("slow")?.value;
     const channel: VoiceBasedChannel | null = interaction.member instanceof GuildMember ? interaction.member.voice.channel : null;
 
     if (!channel) {
@@ -28,8 +42,8 @@ export const TtsVoiceCommand: Command = {
     }
 
     const audioUrl: string = getAudioUrl(tts as string, {
-      lang: "fr-FR",
-      slow: false,
+      lang: (lang as string) ? (lang as string) : "fr-FR",
+      slow: (slow as boolean) ? (slow as boolean) : false,
       host: "https://translate.google.com",
     });
 
