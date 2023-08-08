@@ -21,6 +21,6 @@
     "moment": "^2.29.4",
     "pretty-ms": "^7.0.1",
     "sodium-native": "^4.0.4",
-    "tslog": "^4.8.6"
+    "tslog": "^4.9.1"
   }
 }
