@@ -13,7 +13,7 @@ export const DiceCommand: Command = {
     const embed: EmbedBuilder = new EmbedBuilder()
       .setColor("#FFFFFF")
       .setTitle("Dice")
-      .setDescription(`${interaction.user.username} a eu **${randomNumber}** au lancé de dé`)
+      .setDescription(`${interaction.user.username} a eu **${randomNumber}** au lancer de dés`)
       .setThumbnail("https://cdn-icons-png.flaticon.com/512/7101/7101743.png")
       .setTimestamp()
       .setFooter({
