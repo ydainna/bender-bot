@@ -6,5 +6,6 @@ import { DiceCommand } from "./commands/divers/DiceCommand";
 import { UserInformationCommand } from "./commands/divers/UserInformationCommand";
 import { InfoCommand } from "./commands/divers/InfoCommand";
 import { TtsVoiceCommand } from "./commands/divers/TtsVoiceCommand";
+import { BibleCommand } from "./commands/divers/BibleCommand";
 
-export const Commands: Command[] = [TtsVoiceCommand, EightBallCommand, HowToCommand, DiceCommand, InfoCommand, UserInformationCommand];
+export const Commands: Command[] = [TtsVoiceCommand, EightBallCommand, HowToCommand, DiceCommand, InfoCommand, UserInformationCommand, BibleCommand];

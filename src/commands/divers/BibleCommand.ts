@@ -9,19 +9,26 @@ export const BibleCommand: Command = {
   ephemeral: false,
 
   run: async (client: Client, interaction: CommandInteraction) => {
-    const getBible = await fetch(`https://api.getbible.net/v2/ls1910/${getRandomInt(1, 66)}/chapters.json`);
+    const randomBook = getRandomInt(1, 66);
+    const getBible = await fetch(`https://api.getbible.net/v2/ls1910/${randomBook}/chapters.json`);
+    const bibleData = await getBible.json();
 
-    const json = await getBible.json();
+    const randomChapter = getRandomInt(1, Object.keys(bibleData).length);
 
-    const bookName = json.results[0].book_name;
-    const name = json.results[0].name;
-    const chapterUrl = json.results[0].url;
+    //chapter
+    const getChapter = await fetch(`https://api.getbible.net/v2/ls1910/${randomBook}/${randomChapter}.json`);
+    const chapterData = await getChapter.json();
+
+    const randomVerse = chapterData.verses.length;
+    const randomVerseNbr = getRandomInt(1, randomVerse);
+
+    const { name, book_name, chapter } = chapterData;
 
     const embed = new EmbedBuilder()
       .setColor("#FF6A00")
       .addFields({
-        name: `${bookName} + " (" + ${name} + ")`,
-        value: "TODO",
+        name: `${name} (${book_name} - ${chapter}:${randomVerse})`,
+        value: `${chapterData.verses[randomVerseNbr].text}`,
       })
       .setThumbnail("https://cdn-icons-png.flaticon.com/512/2600/2600768.png")
       .setTimestamp()
