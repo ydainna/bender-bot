@@ -1,6 +1,6 @@
 import { ApplicationCommandOptionType, ApplicationCommandType, CommandInteraction, Client, EmbedBuilder, User, GuildMember } from "discord.js";
-import moment from "moment";
 import { Command } from "../../Command";
+import { DateTime } from "luxon";
 
 export const UserInformationCommand: Command = {
   name: "userinfo",
@@ -18,15 +18,15 @@ export const UserInformationCommand: Command = {
   run: async (client: Client, interaction: CommandInteraction) => {
     const userId: string | number | boolean | undefined = interaction.options.get("mention")?.value;
     const user: User = await client.users.fetch(userId as string);
+    const isUserBot: string = user.bot ? "yes" : "no";
     const memberGuild: GuildMember | undefined = interaction.guild?.members.cache.get(userId as string);
     const embed: EmbedBuilder = new EmbedBuilder()
       .setTitle(`${user.username}'s Information`)
       .setThumbnail(user.displayAvatarURL({ forceStatic: false }))
       .addFields(
         { name: "User", value: `\`${user.username}\``, inline: true },
-        { name: "Discrim-inator", value: `\`#${user.discriminator}\``, inline: true },
         { name: "ID", value: `\`${user.id}\``, inline: true },
-        { name: "Bot", value: `\`${user.bot}\``, inline: true },
+        { name: "Bot", value: `\`${isUserBot}\``, inline: true },
         {
           name: "Roles",
           value: `${memberGuild?.roles.cache
@@ -36,8 +36,8 @@ export const UserInformationCommand: Command = {
           inline: true,
         },
         { name: "Highest Role", value: `${memberGuild?.roles.highest}`, inline: true },
-        { name: "Joined at", value: `\`${moment(memberGuild?.joinedAt).format("DD MMMM YYYY")}\``, inline: true },
-        { name: "Created at", value: `\`${moment(user.createdAt).format("DD MMMM YYYY")}\``, inline: true }
+        { name: "Joined at", value: `\`${DateTime.fromJSDate(memberGuild?.joinedAt as Date).toFormat("dd LLLL yyyy")}\``, inline: true },
+        { name: "Created at", value: `\`${DateTime.fromJSDate(user.createdAt).toFormat("dd LLLL yyyy")}\``, inline: true }
       )
       .setFooter({
         text: interaction.user.username,

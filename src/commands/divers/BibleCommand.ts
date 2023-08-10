@@ -23,6 +23,12 @@ export const BibleCommand: Command = {
     const randomVerseNbr = getRandomInt(1, randomVerse);
 
     const { name, book_name, chapter } = chapterData;
+    const textVers = chapterData.verses[randomVerseNbr].text;
+
+    if (textVers === undefined) {
+      console.log(`- name : ${name} \n- book_name : ${book_name} \n- chapter : ${chapter} \n- randomVerse : ${randomVerse}`);
+      return;
+    }
 
     const embed = new EmbedBuilder()
       .setColor("#FF6A00")

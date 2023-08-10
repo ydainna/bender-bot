@@ -16,7 +16,7 @@ export const guildMemberRemoveListener = {
       .setColor("#FF0000")
       .setTimestamp();
 
-    let channel = client.channels.cache.get("870603102112325673") as TextChannel;
+    let channel = client.channels.cache.get("870363038082007065") as TextChannel;
     const log = getLogger("GuildMemberRemoveListener");
     log.info(`The member ${interaction.user.username} has leave the server ${interaction.guild?.name}`);
     channel?.send({ embeds: [embed] });
