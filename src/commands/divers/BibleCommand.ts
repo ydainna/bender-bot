@@ -9,20 +9,21 @@ export const BibleCommand: Command = {
   ephemeral: false,
 
   run: async (client: Client, interaction: CommandInteraction) => {
-    const randomBook = getRandomInt(1, 66);
-    const getBible = await fetch(`https://api.getbible.net/v2/ls1910/${randomBook}/chapters.json`);
+    const randomBook: number = getRandomInt(1, 66);
+
+    const getBible: Response = await fetch(`https://api.getbible.net/v2/ls1910/${randomBook}/chapters.json`);
     const bibleData = await getBible.json();
 
-    const randomChapter = getRandomInt(1, Object.keys(bibleData).length);
+    const randomChapter: number = getRandomInt(1, Object.keys(bibleData).length);
 
     //chapter
     const getChapter = await fetch(`https://api.getbible.net/v2/ls1910/${randomBook}/${randomChapter}.json`);
     const chapterData = await getChapter.json();
 
     const randomVerse = chapterData.verses.length;
-    const randomVerseNbr = getRandomInt(1, randomVerse);
+    const randomVerseNbr: number = getRandomInt(1, randomVerse);
 
-    const { name, book_name, chapter } = chapterData;
+    const { name, book_name, chapter, translation } = chapterData;
     const textVers = chapterData.verses[randomVerseNbr].text;
 
     if (textVers === undefined) {
@@ -30,8 +31,9 @@ export const BibleCommand: Command = {
       return;
     }
 
-    const embed = new EmbedBuilder()
+    const embed: EmbedBuilder = new EmbedBuilder()
       .setColor("#FF6A00")
+      .setTitle(translation)
       .addFields({
         name: `${name} (${book_name} - ${chapter}:${randomVerse})`,
         value: `${chapterData.verses[randomVerseNbr].text}`,
