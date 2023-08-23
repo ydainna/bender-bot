@@ -20,7 +20,7 @@
     "ffmpeg": "^0.0.4",
     "ffmpeg-static": "^5.2.0",
     "google-tts-api": "^2.0.2",
-    "luxon": "^3.4.0",
+    "luxon": "^3.4.1",
     "pretty-ms": "^7.0.1",
     "sodium-native": "^4.0.4",
     "tslog": "^4.9.1"
