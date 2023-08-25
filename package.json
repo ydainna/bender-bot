@@ -23,6 +23,6 @@
     "luxon": "^3.4.1",
     "pretty-ms": "^7.0.1",
     "sodium-native": "^4.0.4",
-    "tslog": "^4.9.1"
+    "tslog": "^4.9.2"
   }
 }
