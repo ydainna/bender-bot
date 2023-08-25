@@ -1,10 +1,10 @@
 import { Command } from "./Command";
 //divers
-import { EightBallCommand } from "./commands/divers/EightBallCommand";
-import { HowToCommand } from "./commands/divers/HowToCommand";
-import { DiceCommand } from "./commands/divers/DiceCommand";
-import { UserInformationCommand } from "./commands/divers/UserInformationCommand";
-import { InfoCommand } from "./commands/divers/InfoCommand";
+import { EightBallCommand } from "./commands/fun/EightBallCommand";
+import { HowToCommand } from "./commands/fun/HowToCommand";
+import { DiceCommand } from "./commands/games/DiceCommand";
+import { UserInformationCommand } from "./commands/informations/UserInformationCommand";
+import { InfoCommand } from "./commands/informations/InfoCommand";
 import { TtsVoiceCommand } from "./commands/divers/TtsVoiceCommand";
 import { BibleCommand } from "./commands/divers/BibleCommand";
 
