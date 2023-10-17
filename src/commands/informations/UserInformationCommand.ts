@@ -25,7 +25,6 @@ export const UserInformationCommand: Command = {
       .setThumbnail(user.displayAvatarURL({ forceStatic: false }))
       .addFields(
         { name: "User", value: `\`${user.username}\``, inline: true },
-        { name: "ID", value: `\`${user.id}\``, inline: true },
         { name: "Bot", value: `\`${isUserBot}\``, inline: true },
         {
           name: "Roles",

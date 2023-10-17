@@ -7,7 +7,7 @@ export const guildMemberRemoveListener = {
   execute: async (client: Client, interaction: Interaction) => {
     const embed = new EmbedBuilder()
       .setTitle(`Un membre vient de partir 😭`)
-      .setDescription(`**${interaction.user?.username}**#${interaction.user.discriminator} viens de quitter le serveur`)
+      .setDescription(`**${interaction.user?.username}** viens de quitter le serveur`)
       .setThumbnail(interaction.user?.displayAvatarURL({ forceStatic: false }))
       .setFooter({
         text: interaction.user.username,

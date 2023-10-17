@@ -7,7 +7,7 @@ export const guildMemberAddListener = {
   execute: async (client: Client, interaction: Interaction) => {
     const embed = new EmbedBuilder()
       .setTitle(`Un membre vient d'arriver !`)
-      .setDescription(`**${interaction.user.username}**#${interaction.user.discriminator} a rejoint le serveur`)
+      .setDescription(`**${interaction.user.username}** a rejoint le serveur`)
       .setThumbnail(interaction.user?.displayAvatarURL({ forceStatic: false }))
       .setFooter({
         text: interaction.user.username,
