@@ -1,0 +1,62 @@
+import { CommandInteraction, Client, ApplicationCommandType, GuildMember, Role, ApplicationCommandOptionType, User } from "discord.js";
+import { Command } from "../../Command";
+import { setError } from "../../utils/setError";
+
+export const PrivateMessageCommand: Command = {
+  name: "private-message",
+  description: "Send a private message",
+  type: ApplicationCommandType.ChatInput,
+  options: [
+    {
+      type: ApplicationCommandOptionType.String,
+      required: true,
+      name: "mention",
+      description: "Username to send the message to",
+    },
+    {
+      type: ApplicationCommandOptionType.String,
+      required: false,
+      name: "message",
+      description: "Message to send to the user",
+    },
+  ],
+  ephemeral: true,
+
+  run: async (client: Client, interaction: CommandInteraction) => {
+    const userId: string | number | boolean | undefined = interaction.options.get("mention")?.value;
+    const user: User = await client.users.fetch(userId as string);
+    const roleID: string = "ROLE_ID";
+
+    const { guild, member } = interaction;
+    if (!guild || !member) {
+      setError("La guilde ou le membre n'a pas été trouver ou n'existe pas", interaction);
+      return;
+    }
+
+    const adminRole: Role | null = await guild.roles.fetch(roleID);
+    if (!adminRole) {
+      setError("Le rôle n'a pas été trouver ou n'existe pas", interaction);
+      return;
+    }
+
+    if ((member as GuildMember).roles.cache.has(adminRole.id)) {
+      if (!client.users.cache.has(user.id)) {
+        setError("L'utilisateur n'a pas été trouver ou n'existe pas", interaction);
+        return;
+      }
+
+      const message = interaction.options.get("message")?.value as string | undefined;
+      if (message) {
+        client.users.send(user.id, message);
+      }
+
+      await interaction.followUp({
+        content: "Message envoyé !",
+      });
+    } else {
+      await interaction.followUp({
+        content: "Vous n'avez pas la permission d'envoyer ce message",
+      });
+    }
+  },
+};

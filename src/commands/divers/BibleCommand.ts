@@ -12,13 +12,13 @@ export const BibleCommand: Command = {
     const randomBook: number = getRandomInt(1, 66);
 
     const getBible: Response = await fetch(`https://api.getbible.net/v2/ls1910/${randomBook}/chapters.json`);
-    const bibleData = await getBible.json();
+    const bibleData: any = await getBible.json();
 
     const randomChapter: number = getRandomInt(1, Object.keys(bibleData).length);
 
     //chapter
-    const getChapter = await fetch(`https://api.getbible.net/v2/ls1910/${randomBook}/${randomChapter}.json`);
-    const chapterData = await getChapter.json();
+    const getChapter: Response = await fetch(`https://api.getbible.net/v2/ls1910/${randomBook}/${randomChapter}.json`);
+    const chapterData: any = await getChapter.json();
 
     const randomVerse = chapterData.verses.length;
     const randomVerseNbr: number = getRandomInt(1, randomVerse);
