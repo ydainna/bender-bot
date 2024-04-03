@@ -27,7 +27,7 @@ export const client: Client<boolean> = new Client({
 (async () => {
   const token: string = process.env.BOT_TOKEN as string;
 
-  RansomService.start();
+  //RansomService.start();
 
   const log: Logger<unknown> = getLogger("Bot");
   log.info("Bot is starting...");

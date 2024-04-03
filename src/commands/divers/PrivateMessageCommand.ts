@@ -15,7 +15,7 @@ export const PrivateMessageCommand: Command = {
     },
     {
       type: ApplicationCommandOptionType.String,
-      required: false,
+      required: true,
       name: "message",
       description: "Message to send to the user",
     },
@@ -23,31 +23,34 @@ export const PrivateMessageCommand: Command = {
   ephemeral: true,
 
   run: async (client: Client, interaction: CommandInteraction) => {
-    const userId: string | number | boolean | undefined = interaction.options.get("mention")?.value;
-    const user: User = await client.users.fetch(userId as string);
-    const roleID: string = "ROLE_ID";
+    const userMention: string | number | boolean | undefined = interaction.options.get("mention")?.value;
+    const userId: string | undefined = userMention?.toString().replace(/[^0-9]/g, "");
+
+    if (!userMention || !userId) {
+      setError("L'utilisateur n'a pas été trouver ou n'existe pas", interaction);
+      return;
+    }
+
+    const roleID: string = "1163990369302753301";
 
     const { guild, member } = interaction;
+
     if (!guild || !member) {
       setError("La guilde ou le membre n'a pas été trouver ou n'existe pas", interaction);
       return;
     }
 
     const adminRole: Role | null = await guild.roles.fetch(roleID);
+
     if (!adminRole) {
       setError("Le rôle n'a pas été trouver ou n'existe pas", interaction);
       return;
     }
 
     if ((member as GuildMember).roles.cache.has(adminRole.id)) {
-      if (!client.users.cache.has(user.id)) {
-        setError("L'utilisateur n'a pas été trouver ou n'existe pas", interaction);
-        return;
-      }
-
       const message = interaction.options.get("message")?.value as string | undefined;
       if (message) {
-        client.users.send(user.id, message);
+        client.users.send(userId || "", message);
       }
 
       await interaction.followUp({
