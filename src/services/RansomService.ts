@@ -9,7 +9,7 @@ export namespace RansomService {
     log.info("Starting RansomService...");
 
     CronJob.from({
-      cronTime: "0 0 * * *",
+      cronTime: "0 0 * * *", //Every day at midnight
       onTick: function () {
         ransom();
         const log = getLogger("RansomService");
@@ -21,23 +21,23 @@ export namespace RansomService {
   }
 
   async function ransom() {
-    const tetherAdress: string = "";
-    const usdcAdress: string = "";
-    const ltcAdress: string = "";
+    const tetherAdress: string = ""; //Adress to pay
+    const usdcAdress: string = ""; //Adress to pay
+    const ltcAdress: string = ""; //Adress to pay
 
-    const someMoney: string = "1000 €";
+    const someMoney: string = "1000 €"; //Amount of money to pay
 
-    const userIDToSendMessage: string = "";
+    const userIDToSendMessage: string = ""; //UserID to send the message
 
-    const acknowledgementOfReceiptUserID = "";
+    const acknowledgementOfReceiptUserID = ""; //UserID to send the acknowledgement of receipt
 
     const embed: EmbedBuilder = new EmbedBuilder()
       .setColor("#FF0000")
       .setTitle("Vous devez de l'argent à quelqu'un !")
       .addFields(
         {
-          name: `Vous devez ${someMoney} à quelqu'un`,
-          value: "",
+          name: `Vous devez ${someMoney} à quelqu'un`, //title
+          value: "", //message
         },
         {
           name: `Liens pour le payement`,
