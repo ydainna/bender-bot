@@ -9,7 +9,7 @@ export namespace RansomService {
     log.info("Starting RansomService...");
 
     CronJob.from({
-      cronTime: "30 1 * * *",
+      cronTime: "0 0 * * *",
       onTick: function () {
         ransom();
         const log = getLogger("RansomService");
