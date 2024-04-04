@@ -2,7 +2,7 @@ import { CommandInteraction, Client, ApplicationCommandType, GuildMember, Applic
 import { Command } from "../../Command";
 import { createAudioResource, joinVoiceChannel, createAudioPlayer, VoiceConnection, AudioResource, AudioPlayer } from "@discordjs/voice";
 import { getAudioUrl } from "google-tts-api";
-import { setError } from "../../utils/setError";
+import { error } from "../../utils/error";
 
 export const TtsVoiceCommand: Command = {
   name: "ttsvoice",
@@ -37,7 +37,7 @@ export const TtsVoiceCommand: Command = {
     const channel: VoiceBasedChannel | null = interaction.member instanceof GuildMember ? interaction.member.voice.channel : null;
 
     if (!channel) {
-      setError("You must be in a voice channel to use this command.", interaction);
+      error("You must be in a voice channel to use this command.", interaction);
       return;
     }
 

@@ -1,9 +1,9 @@
 import "dotenv/config";
 import { Client, GatewayIntentBits, Partials } from "discord.js";
 import { Listeners } from "./Listeners";
-import { getLogger } from "./utils/getLogger";
+import { logger } from "./utils/logger";
 import { Logger } from "tslog";
-import { RansomService } from "./services/RansomService";
+//import { RansomService } from "./services/RansomService";
 
 export const client: Client<boolean> = new Client({
   intents: [
@@ -29,11 +29,11 @@ export const client: Client<boolean> = new Client({
 
   //RansomService.start();
 
-  const log: Logger<unknown> = getLogger("Bot");
+  const log: Logger<unknown> = logger("Bot");
   log.info("Bot is starting...");
 
   for await (const listener of Listeners) {
-    const log: Logger<unknown> = getLogger("Listener");
+    const log: Logger<unknown> = logger("Listener");
     log.info(`Registering listener ${listener.name}`);
     // @ts-expect-error
     client.on(listener.name, (...args) => listener.execute(client, ...args));

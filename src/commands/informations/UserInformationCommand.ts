@@ -6,7 +6,6 @@ export const UserInformationCommand: Command = {
   name: "userinfo",
   description: "Get user information",
   type: ApplicationCommandType.ChatInput,
-  ephemeral: false,
   options: [
     {
       type: ApplicationCommandOptionType.Mentionable,
@@ -15,6 +14,8 @@ export const UserInformationCommand: Command = {
       description: "User for mention",
     },
   ],
+  ephemeral: false,
+
   run: async (client: Client, interaction: CommandInteraction) => {
     const userId: string | number | boolean | undefined = interaction.options.get("mention")?.value;
     const user: User = await client.users.fetch(userId as string);

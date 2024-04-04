@@ -1,5 +1,5 @@
 import { Client, Interaction, EmbedBuilder, TextChannel } from "discord.js";
-import { getLogger } from "../utils/getLogger";
+import { logger } from "../utils/logger";
 
 export const guildMemberAddListener = {
   name: "guildMemberAdd",
@@ -17,7 +17,7 @@ export const guildMemberAddListener = {
       .setTimestamp();
 
     let channel = client.channels.cache.get("870363038082007065") as TextChannel;
-    const log = getLogger("GuildMemberAddListener");
+    const log = logger("GuildMemberAddListener");
     log.info(`The member ${interaction.user.username} has joined the server ${interaction.guild?.name}`);
     channel?.send({ embeds: [embed] });
   },

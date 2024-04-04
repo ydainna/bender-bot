@@ -1,6 +1,6 @@
 import { CommandInteraction, Client, ApplicationCommandType, GuildMember, Role, ApplicationCommandOptionType, User } from "discord.js";
 import { Command } from "../../Command";
-import { setError } from "../../utils/setError";
+import { error } from "../../utils/error";
 
 export const PrivateMessageCommand: Command = {
   name: "private-message",
@@ -27,7 +27,7 @@ export const PrivateMessageCommand: Command = {
     const userId: string | undefined = userMention?.toString().replace(/[^0-9]/g, "");
 
     if (!userMention || !userId) {
-      setError("L'utilisateur n'a pas été trouver ou n'existe pas", interaction);
+      error("L'utilisateur n'a pas été trouver ou n'existe pas", interaction);
       return;
     }
 
@@ -36,14 +36,14 @@ export const PrivateMessageCommand: Command = {
     const { guild, member } = interaction;
 
     if (!guild || !member) {
-      setError("La guilde ou le membre n'a pas été trouver ou n'existe pas", interaction);
+      error("La guilde ou le membre n'a pas été trouver ou n'existe pas", interaction);
       return;
     }
 
     const adminRole: Role | null = await guild.roles.fetch(roleID);
 
     if (!adminRole) {
-      setError("Le rôle n'a pas été trouver ou n'existe pas", interaction);
+      error("Le rôle n'a pas été trouver ou n'existe pas", interaction);
       return;
     }
 
