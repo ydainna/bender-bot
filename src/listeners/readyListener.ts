@@ -1,6 +1,5 @@
 import { ActivityType, Client } from "discord.js";
 import { Commands } from "../Commands";
-import { logger } from "../utils/logger";
 
 export const readyListener = {
   name: "ready",
@@ -20,7 +19,6 @@ export const readyListener = {
     });
     await client.application.commands.set(Commands);
 
-    const log = logger("Bot");
-    log.info(`${client.user.username} is online`);
+    console.log(`[Bot] ${client.user.username} is online`);
   },
 };

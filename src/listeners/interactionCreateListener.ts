@@ -1,6 +1,5 @@
 import { CommandInteraction, Client, Interaction } from "discord.js";
 import { Commands } from "../Commands";
-import { logger } from "../utils/logger";
 
 export const interactionCreateListener = {
   name: "interactionCreate",
@@ -19,8 +18,7 @@ const handleSlashCommand = async (client: Client, interaction: CommandInteractio
     return;
   }
 
-  const log = logger("InteractionCreateListener");
-  log.info(`Executing command ${slashCommand.name} for ${interaction.user.username}`);
+  console.log(`[InteractionCreateListener] Executing command ${slashCommand.name} for ${interaction.user.username}`);
   await interaction.deferReply({ ephemeral: slashCommand.ephemeral });
 
   slashCommand.run(client, interaction);

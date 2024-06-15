@@ -1,19 +1,16 @@
 import { CronJob } from "cron";
-import { logger } from "../utils/logger";
 import { EmbedBuilder } from "discord.js";
 import { client } from "../Bot";
 
 export namespace RansomService {
   export async function start() {
-    const log = logger("RansomService");
-    log.info("Starting RansomService...");
+    console.log("[RansomService] Starting RansomService...");
 
     CronJob.from({
       cronTime: "0 0 * * *", //Every day at midnight
       onTick: function () {
         ransom();
-        const log = logger("RansomService");
-        log.info("RansomService has been executed !");
+        console.log("[RansomService] RansomService has been executed !");
       },
       start: true,
       timeZone: "Europe/Paris",
@@ -52,14 +49,12 @@ export namespace RansomService {
       });
 
     if (!client.users.cache.has(userIDToSendMessage)) {
-      const log = logger("RansomService");
-      log.error("User not found.. (userID)");
+      console.log("[RansomService] User not found.. (userID)");
       return;
     }
 
     if (!client.users.cache.has(acknowledgementOfReceiptUserID)) {
-      const log = logger("RansomService");
-      log.error("User not found.. (acknowledgementOfReceiptUserID)");
+      console.log("[RansomService] User not found.. (acknowledgementOfReceiptUserID)");
       return;
     }
 
