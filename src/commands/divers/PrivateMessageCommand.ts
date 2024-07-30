@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandType, GuildMember, Role, ApplicationCommandOptionType, User } from "discord.js";
+import { CommandInteraction, Client, ApplicationCommandType, GuildMember, Role, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../../Command";
 import { error } from "../../utils/error";
 
