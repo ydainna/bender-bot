@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { Client, GatewayIntentBits, Partials } from "discord.js";
 import { Listeners } from "./Listeners";
+import { Heartbeat } from "./services/Heartbeat";
 //import { RansomService } from "./services/RansomService";
 
 export const client: Client<boolean> = new Client({
@@ -26,6 +27,8 @@ export const client: Client<boolean> = new Client({
   const token: string = process.env.BOT_TOKEN as string;
 
   //RansomService.start();
+
+  Heartbeat.start();
 
   console.log("[Bot] Bot is starting...");
 
